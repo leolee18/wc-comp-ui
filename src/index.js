@@ -23,10 +23,10 @@ import './components/wc-table.js';
 import './components/wc-text.js';
 import './components/wc-view.js';
 import './components/wc-datalist.js';
-import XyDialog from './components/wc-dialog.js';
-import XyMessage from './components/wc-message.js';
-window.XyDialog = XyDialog;
-window.XyMessage = XyMessage;
+import WcDialog from './components/wc-dialog.js';
+import WcMessage from './components/wc-message.js';
+window.WcDialog = WcDialog;
+window.WcMessage = WcMessage;
 
 import {appHtml,myInit} from './utils/app.js';
 document.getElementById("app").appendChild(appHtml());

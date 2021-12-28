@@ -30,7 +30,7 @@ export function appHtml() {
     <wc-button type="flat" block>flat</wc-button>
     <wc-button block>default</wc-button>
     <p>disabled</p>
-    <wc-button disabled type="primary" onclick="XyMessage.info('This a info message')"><a>primary</a></wc-button>
+    <wc-button disabled type="primary" onclick="WcMessage.info('This a info message')"><a>primary</a></wc-button>
     <wc-button disabled type="dashed">dashed</wc-button>
     <wc-button disabled type="flat">flat</wc-button>
     <wc-button disabled >default</wc-button>
@@ -193,12 +193,12 @@ export function appHtml() {
     </wc-row>
     <h2>dialog</h2>
     <wc-button type="primary" onclick="showDialog()">open dialog</wc-button>
-    <wc-button onclick="XyDialog.alert('alert')">alert</wc-button>
+    <wc-button onclick="WcDialog.alert('alert')">alert</wc-button>
     <wc-button id="confirm-btn">confirm</wc-button>
-    <wc-button onclick="XyDialog.info('info')">info</wc-button>
-    <wc-button onclick="XyDialog.success({title:'成功',content:'success',oktext:'send'})">success</wc-button>
-    <wc-button onclick="XyDialog.error('error')">error</wc-button>
-    <wc-button onclick="XyDialog.warning('warning')">warning</wc-button>
+    <wc-button onclick="WcDialog.info('info')">info</wc-button>
+    <wc-button onclick="WcDialog.success({title:'成功',content:'success',oktext:'send'})">success</wc-button>
+    <wc-button onclick="WcDialog.error('error')">error</wc-button>
+    <wc-button onclick="WcDialog.warning('warning')">warning</wc-button>
     <wc-dialog id="dialog02">232</wc-dialog>
     <wc-dialog id="dialog01" title="标题" oktext="确 定" canceltext="取消" >
         <wc-tab>
@@ -290,11 +290,11 @@ export function appHtml() {
     <p>pane</p>
     <wc-date-pane style="width:400px"></wc-date-pane>
     <h2>message</h2>
-    <wc-button onclick="XyMessage.info('This a info message')">info</wc-button>
-    <wc-button onclick="XyMessage.success('This a success message')">success</wc-button>
-    <wc-button onclick="XyMessage.error('This a error message')">error</wc-button>
-    <wc-button onclick="XyMessage.warning('This a warning message')">warning</wc-button>
-    <wc-button onclick="XyMessage.loading('This a loading message')">loading</wc-button>
+    <wc-button onclick="WcMessage.info('This a info message')">info</wc-button>
+    <wc-button onclick="WcMessage.success('This a success message')">success</wc-button>
+    <wc-button onclick="WcMessage.error('This a error message')">error</wc-button>
+    <wc-button onclick="WcMessage.warning('This a warning message')">warning</wc-button>
+    <wc-button onclick="WcMessage.loading('This a loading message')">loading</wc-button>
     <h2>input</h2>
     <p>placeholder</p>
     <wc-input placeholder="user" defaultvalue="xboxyan"></wc-input>
@@ -498,7 +498,7 @@ export function myInit(){
         console.log('2')
     }
     document.getElementById('confirm-btn').onclick = function(ev){
-        XyDialog.confirm({
+        WcDialog.confirm({
             header:'确定要删除吗',
             type:'error',
             content:'一旦删除无法还原',
