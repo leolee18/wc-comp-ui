@@ -1,7 +1,7 @@
-import './xy-tips.js';
-import './xy-button.js';
+import './wc-tips.js';
+import './wc-button.js';
 
-export default class XyInput extends HTMLElement {
+export default class WcInput extends HTMLElement {
 
     static get observedAttributes() { return ['label','disabled','pattern','required','readonly','placeholder'] }
 
@@ -29,14 +29,14 @@ export default class XyInput extends HTMLElement {
         :host([block]){
             display:block
         }
-        xy-tips[show=show]{
+        wc-tips[show=show]{
             color:var(--errorColor,#f4615c);
         }
         :host([invalid]){
             --themeColor:var(--errorColor,#f4615c);
             border-color:var(--errorColor,#f4615c);
         }
-        :host([invalid]) xy-icon{
+        :host([invalid]) wc-icon{
             color:var(--errorColor,#f4615c);
         }
         :host(:focus-within:not([disabled])),:host(:not([disabled]):hover){
@@ -46,7 +46,7 @@ export default class XyInput extends HTMLElement {
             opacity:.8;
             cursor:not-allowed; 
         }
-        :host([disabled]) xy-tips{
+        :host([disabled]) wc-tips{
             pointer-events:none;
             background:rgba(0,0,0,.1);
         }
@@ -56,11 +56,11 @@ export default class XyInput extends HTMLElement {
         :host .input::placeholder{
             color:#999;
         }
-        :host(xy-textarea){
+        :host(wc-textarea){
             line-height:1.5;
             padding-right:.25em;
         }
-        xy-tips{  
+        wc-tips{  
             display:flex;
             width: 100%;
             height: 100%;
@@ -70,7 +70,7 @@ export default class XyInput extends HTMLElement {
             font-family:inherit;
             transition:.3s background-color;
         }
-        :host(xy-textarea) xy-tips{
+        :host(wc-textarea) wc-tips{
             margin-right:-.25em;
             padding-right:.25em;
             align-items:flex-start;
@@ -93,7 +93,7 @@ export default class XyInput extends HTMLElement {
             transition: color .3s;
             animation: removeBg 0s forwards;
         }
-        :host(xy-textarea) .input{
+        :host(wc-textarea) .input{
             margin:0;
         }
         input[type="number"]::-webkit-inner-spin-button{
@@ -131,7 +131,7 @@ export default class XyInput extends HTMLElement {
             margin-right:0.25em;
             color:#999;
         }
-        :host(xy-textarea) .icon-pre{
+        :host(wc-textarea) .icon-pre{
             height:1.5em;
         }
         .btn-right{
@@ -149,7 +149,7 @@ export default class XyInput extends HTMLElement {
             visibility:hidden;
             transition:0s;
         }
-        .btn-number xy-button{
+        .btn-number wc-button{
             display: flex;
             color: #999;
             border-radius:0;
@@ -160,11 +160,11 @@ export default class XyInput extends HTMLElement {
             transition:.2s;
         }
 
-        .btn-number xy-button:hover{
+        .btn-number wc-button:hover{
             flex:1.5;
         }
 
-        xy-button:not([disabled]):hover,xy-button:not([disabled]):focus-within{
+        wc-button:not([disabled]):hover,wc-button:not([disabled]):focus-within{
             color:var(--themeColor,#42b983);
         }
 
@@ -181,10 +181,10 @@ export default class XyInput extends HTMLElement {
             }
         }
         </style>
-        <xy-tips id="input-con" dir="${this.errordir}" type="error">
+        <wc-tips id="input-con" dir="${this.errordir}" type="error">
             ${
                 this.icon?
-                '<xy-icon class="icon-pre" name='+this.icon+'></xy-icon>'
+                '<wc-icon class="icon-pre" name='+this.icon+'></wc-icon>'
                 :
                 ''
             }
@@ -198,23 +198,23 @@ export default class XyInput extends HTMLElement {
             }
             ${
                 this.type === 'password'&&!multi?
-                '<xy-button id="btn-pass" class="btn-right" icon="eye-close" type="flat" shape="circle"></xy-button>'
+                '<wc-button id="btn-pass" class="btn-right" icon="eye-close" type="flat" shape="circle"></wc-button>'
                 :
                 ''
             }
             ${
                 this.type === 'search'&&!multi?
-                '<xy-button id="btn-search" class="btn-right" icon="search" type="flat" shape="circle"></xy-button>'
+                '<wc-button id="btn-search" class="btn-right" icon="search" type="flat" shape="circle"></wc-button>'
                 :
                 ''
             }
             ${
                 this.type === 'number'&&!multi?
-                '<div class="btn-right btn-number"><xy-button id="btn-add" icon="up" type="flat"></xy-button><xy-button id="btn-sub" icon="down" type="flat"></xy-button></div>'
+                '<div class="btn-right btn-number"><wc-button id="btn-add" icon="up" type="flat"></wc-button><wc-button id="btn-sub" icon="down" type="flat"></wc-button></div>'
                 :
                 ''
             }
-        </xy-tips>
+        </wc-tips>
         `
         this.input = shadowRoot.getElementById('input');
     }
@@ -245,7 +245,7 @@ export default class XyInput extends HTMLElement {
     }
     
     connectedCallback() {
-        this.form = this.closest('xy-form');
+        this.form = this.closest('wc-form');
         this.input = this.shadowRoot.getElementById('input');
         this.inputCon = this.shadowRoot.getElementById('input-con');
         this.input.addEventListener('input',(ev)=>{
@@ -660,20 +660,20 @@ export default class XyInput extends HTMLElement {
     
 }
 
-class XyTextarea extends XyInput {
+class WcTextarea extends WcInput {
     constructor() {
         super({multi:true});
     }
 }
 
-if(!customElements.get('xy-input')){
-    customElements.define('xy-input', XyInput);
+if(!customElements.get('wc-input')){
+    customElements.define('wc-input', WcInput);
 }
-if(!customElements.get('xy-textarea')){
-    customElements.define('xy-textarea', XyTextarea);
+if(!customElements.get('wc-textarea')){
+    customElements.define('wc-textarea', WcTextarea);
 }
 
-class XyInputGroup extends HTMLElement {
+class WcInputGroup extends HTMLElement {
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -705,6 +705,6 @@ class XyInputGroup extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-input-group')){
-    customElements.define('xy-input-group', XyInputGroup);
+if(!customElements.get('wc-input-group')){
+    customElements.define('wc-input-group', WcInputGroup);
 }

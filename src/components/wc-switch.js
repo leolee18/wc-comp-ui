@@ -1,4 +1,4 @@
-export default class XySwitch extends HTMLElement {
+export default class WcSwitch extends HTMLElement {
 
     static get observedAttributes() { return ['disabled','checked'] }
 
@@ -167,6 +167,6 @@ export default class XySwitch extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-switch')){
-    customElements.define('xy-switch', XySwitch);
+if(!customElements.get('wc-switch')){
+    customElements.define('wc-switch', WcSwitch);
 }

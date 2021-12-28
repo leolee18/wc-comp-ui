@@ -28,28 +28,28 @@ div {
   padding: 20px;
 }
 
-xy-button,
-xy-checkbox,
-xy-radio,
-xy-input,
-xy-textarea,
-xy-color-picker,
-xy-select {
+wc-button,
+wc-checkbox,
+wc-radio,
+wc-input,
+wc-textarea,
+wc-color-picker,
+wc-select {
   margin: 0 10px 15px 0;
   vertical-align: middle;
 }
-xy-input:not([block]),
-xy-textarea:not([block]) {
+wc-input:not([block]),
+wc-textarea:not([block]) {
   width: 300px;
 }
-xy-tips > * {
+wc-tips > * {
   margin: 0;
 }
-xy-popover > * {
+wc-popover > * {
   margin: 0;
 }
-xy-tips,
-xy-popover {
+wc-tips,
+wc-popover {
   margin: 0 10px 10px 0;
 }
 p {
@@ -76,17 +76,17 @@ p {
   padding: 5px 10px;
   color: #fff;
 }
-xy-layout {
+wc-layout {
   background: #2196f380;
 }
-xy-img {
+wc-img {
   width: 200px;
   height: 150px;
 }
-xy-form-item * {
+wc-form-item * {
   margin-bottom: 0;
 }
-xy-col {
+wc-col {
   background: #2196f380;
   color: #fff;
 }
@@ -112,7 +112,7 @@ xy-col {
   transition: 0.1s;
   transform: translate(100px, 100px);
 }
-xy-view[draggable] {
+wc-view[draggable] {
   width: 50px;
   height: 50px;
   background: #42b983;
@@ -141,10 +141,10 @@ xy-view[draggable] {
     calc(var(--y) * 1px - var(--_y) * 1px - 10px)
   ) !important;
 }
-xy-view[coord] span {
+wc-view[coord] span {
   margin: auto;
 }
-xy-view[coord] span::after {
+wc-view[coord] span::after {
   counter-reset: x var(--x) y var(--y);
   content: counter(x) "," counter(y);
 }
@@ -163,7 +163,7 @@ xy-view[coord] span::after {
 .dropbox:focus {
   border-color: #2c9666;
 }
-xy-view[resizable] {
+wc-view[resizable] {
   width: 200px;
   height: 200px;
   background: #f1f1f1;

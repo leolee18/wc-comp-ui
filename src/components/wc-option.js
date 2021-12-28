@@ -1,6 +1,6 @@
-import './xy-button.js';
+import './wc-button.js';
 
-class XyOptionGroup extends HTMLElement {
+class WcOptionGroup extends HTMLElement {
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -15,7 +15,7 @@ class XyOptionGroup extends HTMLElement {
                 opacity:.6;
                 font-size: .9em;
             }
-            ::slotted(xy-option){
+            ::slotted(wc-option){
                 --paddingLeft:1em;
             }
         </style>
@@ -30,11 +30,11 @@ class XyOptionGroup extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-optgroup')){
-    customElements.define('xy-optgroup', XyOptionGroup);
+if(!customElements.get('wc-optgroup')){
+    customElements.define('wc-optgroup', WcOptionGroup);
 }
 
-class XyOption extends HTMLElement {
+class WcOption extends HTMLElement {
     static get observedAttributes() { return ["value", "selected","disabled"]; }
     constructor() {
         super();
@@ -58,7 +58,7 @@ class XyOption extends HTMLElement {
                 color:var(--themeColor,#42b983)
             }
         </style>
-        <xy-button id="option" class="option" type="flat" ${this.disabled?"disabled":""}><slot></slot></xy-button>
+        <wc-button id="option" class="option" type="flat" ${this.disabled?"disabled":""}><slot></slot></wc-button>
         `
     }
 
@@ -120,6 +120,6 @@ class XyOption extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-option')){
-    customElements.define('xy-option', XyOption);
+if(!customElements.get('wc-option')){
+    customElements.define('wc-option', WcOption);
 }

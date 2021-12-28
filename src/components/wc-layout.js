@@ -1,4 +1,4 @@
-class XyRow extends HTMLElement {
+class WcRow extends HTMLElement {
 
     static get observedAttributes() { return ['gutter'] }
 
@@ -34,11 +34,11 @@ class XyRow extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-row')){
-    customElements.define('xy-row', XyRow);
+if(!customElements.get('wc-row')){
+    customElements.define('wc-row', WcRow);
 }
 
-class XyCol extends HTMLElement {
+class WcCol extends HTMLElement {
 
     constructor() {
         super();
@@ -58,11 +58,11 @@ class XyCol extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-col')){
-    customElements.define('xy-col', XyCol);
+if(!customElements.get('wc-col')){
+    customElements.define('wc-col', WcCol);
 }
 
-export default class XyLayout extends HTMLElement {
+export default class WcLayout extends HTMLElement {
 
     constructor() {
         super();
@@ -99,6 +99,6 @@ export default class XyLayout extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-layout')){
-    customElements.define('xy-layout', XyLayout);
+if(!customElements.get('wc-layout')){
+    customElements.define('wc-layout', WcLayout);
 }

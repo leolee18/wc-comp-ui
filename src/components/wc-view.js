@@ -1,5 +1,5 @@
 
-class XyView extends HTMLElement {
+class WcView extends HTMLElement {
 
     constructor() {
         super();
@@ -418,6 +418,6 @@ class XyView extends HTMLElement {
     }
 }
 
-if (!customElements.get('xy-view')) {
-    customElements.define('xy-view', XyView);
+if (!customElements.get('wc-view')) {
+    customElements.define('wc-view', WcView);
 }

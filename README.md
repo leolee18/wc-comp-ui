@@ -1,4 +1,4 @@
-# my-comp-ui
+# wc-comp-ui
 引用 https://github.com/XboxYan/xy-ui
 
 ## webpack5 error

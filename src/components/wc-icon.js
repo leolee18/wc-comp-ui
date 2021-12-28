@@ -1,6 +1,6 @@
 //https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&cid=9402
 
-export default class XyIcon extends HTMLElement {
+export default class WcIcon extends HTMLElement {
 
     static get observedAttributes() { return ['name','size','color','path'] }
 
@@ -101,6 +101,6 @@ export default class XyIcon extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-icon')){
-    customElements.define('xy-icon', XyIcon);
+if(!customElements.get('wc-icon')){
+    customElements.define('wc-icon', WcIcon);
 }

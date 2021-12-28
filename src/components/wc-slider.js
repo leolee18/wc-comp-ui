@@ -1,6 +1,6 @@
-import './xy-tips.js';
+import './wc-tips.js';
 
-export default class XySlider extends HTMLElement {
+export default class WcSlider extends HTMLElement {
 
     static get observedAttributes() { return ['min','max','step','disabled','showtips','suffix'] }
 
@@ -124,14 +124,14 @@ export default class XySlider extends HTMLElement {
             position:relative;
             width:20px;
         }
-        :host([vertical]) xy-tips::before,:host([vertical]) xy-tips::after{
+        :host([vertical]) wc-tips::before,:host([vertical]) wc-tips::after{
             left: calc( var(--percent,.5) * 100% + 5px );
         }
         :host(:focus-within) #slider-con,:host(:hover) #slider-con{
             z-index:10
         }
         </style>
-        <xy-tips id='slider-con' dir=${this.vertical?"right":"top"} style="--percent:${(this.defaultvalue-this.min)/(this.max-this.min)}" tips="${this.showtips&&!this.disabled?this.defaultvalue:''}" suffix="${this.suffix}" prefix="${this.prefix}"><input id='slider' value=${this.defaultvalue} min=${this.min} max=${this.max} step=${this.step} ${this.disabled?"disabled":""} type='range'></xy-tips>
+        <wc-tips id='slider-con' dir=${this.vertical?"right":"top"} style="--percent:${(this.defaultvalue-this.min)/(this.max-this.min)}" tips="${this.showtips&&!this.disabled?this.defaultvalue:''}" suffix="${this.suffix}" prefix="${this.prefix}"><input id='slider' value=${this.defaultvalue} min=${this.min} max=${this.max} step=${this.step} ${this.disabled?"disabled":""} type='range'></wc-tips>
         `
     } 
 
@@ -300,6 +300,6 @@ export default class XySlider extends HTMLElement {
     
 }
 
-if(!customElements.get('xy-slider')){
-    customElements.define('xy-slider', XySlider);
+if(!customElements.get('wc-slider')){
+    customElements.define('wc-slider', WcSlider);
 }

@@ -1,6 +1,6 @@
-import './xy-button.js';
+import './wc-button.js';
 
-class XyPopcon extends HTMLElement {
+class WcPopcon extends HTMLElement {
 
     static get observedAttributes() { return ['open','title','oktext','canceltext','loading','type'] }
 
@@ -56,7 +56,7 @@ class XyPopcon extends HTMLElement {
             top:10px;
             border:0;
         }
-        .popcon-footer xy-button {
+        .popcon-footer wc-button {
             font-size: .8em;
             margin-left: .8em;
         }
@@ -86,17 +86,17 @@ class XyPopcon extends HTMLElement {
         }
         </style>
             ${
-                (type||this.type)==='confirm'?'<xy-icon id="popcon-type" class="popcon-type" name="question-circle" color="var(--waringColor,#faad14)"></xy-icon>':''
+                (type||this.type)==='confirm'?'<wc-icon id="popcon-type" class="popcon-type" name="question-circle" color="var(--waringColor,#faad14)"></wc-icon>':''
             }
             <div class="popcon-content">
                 ${
-                    (type||this.type)!==null?'<div class="popcon-title" id="title">'+this.title+'</div><xy-button class="btn-close" id="btn-close" icon="close"></xy-button>':''
+                    (type||this.type)!==null?'<div class="popcon-title" id="title">'+this.title+'</div><wc-button class="btn-close" id="btn-close" icon="close"></wc-button>':''
                 }
                 <div class="popcon-body">
                     <slot></slot>
                 </div>
                 ${
-                    (type||this.type)==='confirm'?'<div class="popcon-footer"><xy-button id="btn-cancel">'+this.canceltext+'</xy-button><xy-button id="btn-submit" type="primary">'+this.oktext+'</xy-button></div>':''
+                    (type||this.type)==='confirm'?'<div class="popcon-footer"><wc-button id="btn-cancel">'+this.canceltext+'</wc-button><wc-button id="btn-submit" type="primary">'+this.oktext+'</wc-button></div>':''
                 }
             </div>
         `
@@ -202,26 +202,26 @@ class XyPopcon extends HTMLElement {
         this.addEventListener('click',(ev)=>{
             if( ev.target.closest('[autoclose]')){
                 this.open = false;
-                window.xyActiveElement.focus();
+                window.WcActiveElement.focus();
             }
         })
         if(this.type){
             this.btnClose.addEventListener('click',()=>{
                 this.open = false;
-                window.xyActiveElement.focus();
+                window.WcActiveElement.focus();
             })
         }
         if(this.type=='confirm'){
             this.btnCancel.addEventListener('click',async ()=>{
                 this.dispatchEvent(new CustomEvent('cancel'));
                 this.open = false;
-                window.xyActiveElement.focus();
+                window.WcActiveElement.focus();
             })
             this.btnSubmit.addEventListener('click',()=>{
                 this.dispatchEvent(new CustomEvent('submit'));
                 if(!this.loading){
                     this.open = false;
-                    window.xyActiveElement.focus();
+                    window.WcActiveElement.focus();
                 }
             })
         }
@@ -230,7 +230,7 @@ class XyPopcon extends HTMLElement {
     attributeChangedCallback (name, oldValue, newValue) {
         if( name == 'open' && this.shadowRoot){
             if(newValue==null && !this.stopfocus){
-                //window.xyActiveElement.focus();
+                //window.WcActiveElement.focus();
             }
         }
         if( name == 'loading' && this.shadowRoot){
@@ -258,11 +258,11 @@ class XyPopcon extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-popcon')){
-    customElements.define('xy-popcon', XyPopcon);
+if(!customElements.get('wc-popcon')){
+    customElements.define('wc-popcon', WcPopcon);
 }
 
-class XyPopover extends HTMLElement {
+class WcPopover extends HTMLElement {
     static get observedAttributes() { return ['title','oktext','canceltext','loading','type'] }
     constructor() {
         super();
@@ -274,143 +274,143 @@ class XyPopover extends HTMLElement {
             position:relative;
             overflow:visible;
         }
-        :host([dir="top"]) ::slotted(xy-popcon){
+        :host([dir="top"]) ::slotted(wc-popcon){
             bottom:100%;
             left:50%;
             transform:translate(-50%,-10px) scale(0);
             transform-origin: center bottom;
         }
-        :host([dir="top"]) ::slotted(xy-popcon[open]),
-        :host([dir="top"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="top"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="top"]) ::slotted(wc-popcon[open]),
+        :host([dir="top"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="top"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(-50%,-10px) scale(1);
         }
-        :host([dir="right"]) ::slotted(xy-popcon){
+        :host([dir="right"]) ::slotted(wc-popcon){
             left:100%;
             top:50%;
             transform:translate(10px,-50%) scale(0);
             transform-origin: left;
         }
-        :host([dir="right"]) ::slotted(xy-popcon[open]),
-        :host([dir="right"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="right"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="right"]) ::slotted(wc-popcon[open]),
+        :host([dir="right"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="right"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(10px,-50%) scale(1);
         }
-        :host([dir="bottom"]) ::slotted(xy-popcon){
+        :host([dir="bottom"]) ::slotted(wc-popcon){
             top:100%;
             left:50%;
             transform:translate(-50%,10px) scale(0);
             transform-origin: center top;
         }
-        :host([dir="bottom"]) ::slotted(xy-popcon[open]),
-        :host([dir="bottom"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="bottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="bottom"]) ::slotted(wc-popcon[open]),
+        :host([dir="bottom"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="bottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(-50%,10px) scale(1);
         }
-        :host([dir="left"]) ::slotted(xy-popcon){
+        :host([dir="left"]) ::slotted(wc-popcon){
             right:100%;
             top:50%;
             transform:translate(-10px,-50%) scale(0);
             transform-origin: right;
         }
-        :host([dir="left"]) ::slotted(xy-popcon[open]),
-        :host([dir="left"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="left"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="left"]) ::slotted(wc-popcon[open]),
+        :host([dir="left"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="left"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(-10px,-50%) scale(1);
         }
-        :host([dir="lefttop"]) ::slotted(xy-popcon){
+        :host([dir="lefttop"]) ::slotted(wc-popcon){
             right:100%;
             top:0;
             transform:translate(-10px) scale(0);
             transform-origin: right top;
         }
-        :host([dir="lefttop"]) ::slotted(xy-popcon[open]),
-        :host([dir="lefttop"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="lefttop"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="lefttop"]) ::slotted(wc-popcon[open]),
+        :host([dir="lefttop"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="lefttop"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(-10px) scale(1);
         }
-        :host([dir="leftbottom"]) ::slotted(xy-popcon){
+        :host([dir="leftbottom"]) ::slotted(wc-popcon){
             right:100%;
             bottom:0;
             transform:translate(-10px) scale(0);
             transform-origin: right bottom;
         }
-        :host([dir="leftbottom"]) ::slotted(xy-popcon[open]),
-        :host([dir="leftbottom"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="leftbottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="leftbottom"]) ::slotted(wc-popcon[open]),
+        :host([dir="leftbottom"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="leftbottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(-10px) scale(1);
         }
-        :host([dir="topleft"]) ::slotted(xy-popcon){
+        :host([dir="topleft"]) ::slotted(wc-popcon){
             bottom:100%;
             left:0;
             transform:translate(0,-10px) scale(0);
             transform-origin: left bottom;
         }
-        :host([dir="topleft"]) ::slotted(xy-popcon[open]),
-        :host([dir="topleft"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="topleft"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="topleft"]) ::slotted(wc-popcon[open]),
+        :host([dir="topleft"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="topleft"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(0,-10px) scale(1);
         }
-        :host([dir="topright"]) ::slotted(xy-popcon){
+        :host([dir="topright"]) ::slotted(wc-popcon){
             bottom:100%;
             right:0;
             transform:translate(0,-10px) scale(0);
             transform-origin: right bottom;
         }
-        :host([dir="topright"]) ::slotted(xy-popcon[open]),
-        :host([dir="topright"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="topright"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="topright"]) ::slotted(wc-popcon[open]),
+        :host([dir="topright"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="topright"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(0,-10px) scale(1);
         }
-        :host([dir="righttop"]) ::slotted(xy-popcon){
+        :host([dir="righttop"]) ::slotted(wc-popcon){
             left:100%;
             top:0;
             transform:translate(10px) scale(0);
             transform-origin: left top;
         }
-        :host([dir="righttop"]) ::slotted(xy-popcon[open]),
-        :host([dir="righttop"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="righttop"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="righttop"]) ::slotted(wc-popcon[open]),
+        :host([dir="righttop"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="righttop"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(10px) scale(1);
         }
-        :host([dir="rightbottom"]) ::slotted(xy-popcon){
+        :host([dir="rightbottom"]) ::slotted(wc-popcon){
             left:100%;
             bottom:0;
             transform:translate(10px) scale(0);
             transform-origin: left bottom;
         }
-        :host([dir="rightbottom"]) ::slotted(xy-popcon[open]),
-        :host([dir="rightbottom"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="rightbottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="rightbottom"]) ::slotted(wc-popcon[open]),
+        :host([dir="rightbottom"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="rightbottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(10px) scale(1);
         }
-        :host([dir="bottomleft"]) ::slotted(xy-popcon),
-        :host(:not([dir])) ::slotted(xy-popcon){
+        :host([dir="bottomleft"]) ::slotted(wc-popcon),
+        :host(:not([dir])) ::slotted(wc-popcon){
             left:0;
             top:100%;
             transform:translate(0,10px) scale(0);
             transform-origin: left top;
         }
-        :host(:not([dir])) ::slotted(xy-popcon[open]),
-        :host(:not([dir])[trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host(:not([dir])[trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon),
-        :host([dir="bottomleft"]) ::slotted(xy-popcon[open]),
-        :host([dir="bottomleft"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="bottomleft"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host(:not([dir])) ::slotted(wc-popcon[open]),
+        :host(:not([dir])[trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host(:not([dir])[trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon),
+        :host([dir="bottomleft"]) ::slotted(wc-popcon[open]),
+        :host([dir="bottomleft"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="bottomleft"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(0,10px) scale(1);
         }
-        :host([dir="bottomright"]) ::slotted(xy-popcon){
+        :host([dir="bottomright"]) ::slotted(wc-popcon){
             right:0;
             top:100%;
             transform:translate(0,10px) scale(0);
             transform-origin: right top;
         }
-        :host([dir="bottomright"]) ::slotted(xy-popcon[open]),
-        :host([dir="bottomright"][trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([dir="bottomright"][trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host([dir="bottomright"]) ::slotted(wc-popcon[open]),
+        :host([dir="bottomright"][trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([dir="bottomright"][trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             transform:translate(0,10px) scale(1);
         }
-        :host([trigger="contextmenu"]) ::slotted(xy-popcon){
+        :host([trigger="contextmenu"]) ::slotted(wc-popcon){
             right:auto;
             bottom:auto;
             left:var(--x,0);
@@ -419,12 +419,12 @@ class XyPopover extends HTMLElement {
             transform:translate(5px,5px) scale(0);
             transition: .15s;
         }
-        :host([trigger="contextmenu"]) ::slotted(xy-popcon[open]){
+        :host([trigger="contextmenu"]) ::slotted(wc-popcon[open]){
             transform:translate(5px,5px) scale(1);
         }
-        :host ::slotted(xy-popcon[open]),
-        :host([trigger="hover"]:not([disabled]):hover) ::slotted(xy-popcon),
-        :host([trigger="focus"]:not([disabled]):focus-within) ::slotted(xy-popcon){
+        :host ::slotted(wc-popcon[open]),
+        :host([trigger="hover"]:not([disabled]):hover) ::slotted(wc-popcon),
+        :host([trigger="focus"]:not([disabled]):focus-within) ::slotted(wc-popcon){
             opacity:1;
             visibility:visible;
         }
@@ -513,10 +513,10 @@ class XyPopover extends HTMLElement {
     }
 
     show(ev){
-        this.popcon = this.querySelector('xy-popcon');
+        this.popcon = this.querySelector('wc-popcon');
         if(!this.disabled){
             if(!this.popcon){
-                this.popcon = new XyPopcon(this.type);
+                this.popcon = new WcPopcon(this.type);
                 this.popcon.type = this.type;
                 this.appendChild(this.popcon);
                 this.popcon.title = this.title||'popover';
@@ -538,7 +538,7 @@ class XyPopover extends HTMLElement {
             }else{
                 const path = ev.path || (ev.composedPath && ev.composedPath());
                 if(!path.includes(this.popcon)){
-                    window.xyActiveElement = document.activeElement;
+                    window.WcActiveElement = document.activeElement;
                     if(this.accomplish){
                         this.popcon.open = true;
                     }else{
@@ -552,7 +552,7 @@ class XyPopover extends HTMLElement {
         return this.popcon;
     }
     connectedCallback() {
-        this.popcon = this.querySelector('xy-popcon');
+        this.popcon = this.querySelector('wc-popcon');
         if(!(this.trigger&&this.trigger!=='click')){
             this.addEventListener('click',this.show);
         }
@@ -605,6 +605,6 @@ class XyPopover extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-popover')){
-    customElements.define('xy-popover', XyPopover);
+if(!customElements.get('wc-popover')){
+    customElements.define('wc-popover', WcPopover);
 }

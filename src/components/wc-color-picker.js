@@ -1,12 +1,12 @@
-import './xy-button.js';
-import './xy-popover.js';
-import message from './xy-message.js';
+import './wc-button.js';
+import './wc-popover.js';
+import message from './wc-message.js';
 import { rgbToHsv,hslToHsv,parseToHSVA } from '../utils/color.js';
 import { HSVaColor } from '../utils/hsvacolor.js';
 
 const Material_colors = ['#f44336','#E91E63','#9C27B0','#673AB7','#3F51B5','#2196F3','#03A9F4','#00BCD4','#009688','#4CAF50','#8BC34A','#CDDC39','#FFEB3B','#FFC107','#FF9800','#FF5722','#795548','#9E9E9E','#607D8B','rgba(0,0,0,.65)','transparent']
 
-class XyColorPane extends HTMLElement {
+class WcColorPane extends HTMLElement {
 
     constructor() {
         super();
@@ -476,11 +476,11 @@ class XyColorPane extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-color-pane')){
-    customElements.define('xy-color-pane', XyColorPane);
+if(!customElements.get('wc-color-pane')){
+    customElements.define('wc-color-pane', WcColorPane);
 }
 
-export default class XyColorPicker extends HTMLElement {
+export default class WcColorPicker extends HTMLElement {
 
     static get observedAttributes() { return ['disabled','dir'] }
 
@@ -504,10 +504,10 @@ export default class XyColorPicker extends HTMLElement {
             pointer-events:none;
         }
         
-        :host(:focus-within) xy-popover,:host(:hover) xy-popover{ 
+        :host(:focus-within) wc-popover,:host(:hover) wc-popover{ 
             z-index: 2;
         }
-        xy-popover{
+        wc-popover{
             width:100%;
             height:100%;
         }
@@ -521,10 +521,10 @@ export default class XyColorPicker extends HTMLElement {
         .color-btn:hover{
             z-index: auto;
         }
-        xy-popover{
+        wc-popover{
             display:block;
         }
-        xy-popcon{
+        wc-popcon{
             min-width:100%;
         }
         .pop-footer{
@@ -532,7 +532,7 @@ export default class XyColorPicker extends HTMLElement {
             justify-content:flex-end;
             padding:0 .8em .8em;
         }
-        .pop-footer xy-button{
+        .pop-footer wc-button{
             font-size: .8em;
             margin-left: .8em;
         }
@@ -549,15 +549,15 @@ export default class XyColorPicker extends HTMLElement {
             background-size:10px 10px;
         }
         </style>
-        <xy-popover id="popover" ${this.dir? "dir='"+this.dir+"'" : ""}>
-            <xy-button class="color-btn" id="color-btn" ${this.disabled? "disabled" : ""}></xy-button>
-            <xy-popcon id="popcon">
+        <wc-popover id="popover" ${this.dir? "dir='"+this.dir+"'" : ""}>
+            <wc-button class="color-btn" id="color-btn" ${this.disabled? "disabled" : ""}></wc-button>
+            <wc-popcon id="popcon">
                 <div class="pop-footer">
-                    <xy-button autoclose>取 消</xy-button>
-                    <xy-button type="primary" id="btn-submit" autoclose>确 认</xy-button>
+                    <wc-button autoclose>取 消</wc-button>
+                    <wc-button type="primary" id="btn-submit" autoclose>确 认</wc-button>
                 </div>
-            </xy-popcon>
-        </xy-popover>
+            </wc-popcon>
+        </wc-popover>
         `
     }
 
@@ -572,7 +572,7 @@ export default class XyColorPicker extends HTMLElement {
         this.btnSubmit = this.shadowRoot.getElementById('btn-submit');
         this.colorBtn.addEventListener('click',()=>{
             if(!this.colorPane){
-                this.colorPane = new XyColorPane();
+                this.colorPane = new WcColorPane();
                 this.colorPane.defaultvalue = this.defaultvalue;
                 this.popcon.prepend(this.colorPane);
             }
@@ -665,6 +665,6 @@ export default class XyColorPicker extends HTMLElement {
     }
 }
 
-if (!customElements.get('xy-color-picker')) {
-    customElements.define('xy-color-picker', XyColorPicker);
+if (!customElements.get('wc-color-picker')) {
+    customElements.define('wc-color-picker', WcColorPicker);
 }

@@ -1,6 +1,6 @@
-import './xy-loading.js';
+import './wc-loading.js';
 
-class XyTr extends HTMLElement {
+class WcTr extends HTMLElement {
 
     static get observedAttributes() { return ['checked'] }
 
@@ -12,7 +12,7 @@ class XyTr extends HTMLElement {
         :host {
             display:contents;
         }
-        :host(:hover) ::slotted(xy-td)::before{
+        :host(:hover) ::slotted(wc-td)::before{
             opacity:.1;
         }
         :host(:hover) .select::before{
@@ -21,13 +21,13 @@ class XyTr extends HTMLElement {
         .select{
             display:var(--select,none);
         }
-        .select xy-checkbox{
+        .select wc-checkbox{
             background-color: #fff;
             border-radius: 2px;
             z-index: 5;
         }
         </style>
-        <xy-td class="select"><xy-checkbox></xy-checkbox></xy-td>
+        <wc-td class="select"><wc-checkbox></wc-checkbox></wc-td>
         <slot></slot>
         `
     }
@@ -45,7 +45,7 @@ class XyTr extends HTMLElement {
     }
 
     connectedCallback() {
-        this.checkbox = this.shadowRoot.querySelector('xy-checkbox');
+        this.checkbox = this.shadowRoot.querySelector('wc-checkbox');
         this.checkbox.addEventListener('change',()=>{
             this.checked = this.checkbox.checked;
             this.dispatchEvent(new CustomEvent('change', {
@@ -63,11 +63,11 @@ class XyTr extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-tr')){
-    customElements.define('xy-tr', XyTr);
+if(!customElements.get('wc-tr')){
+    customElements.define('wc-tr', WcTr);
 }
 
-class XyTd extends HTMLElement {
+class WcTd extends HTMLElement {
 
     constructor() {
         super();
@@ -107,11 +107,11 @@ class XyTd extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-td')){
-    customElements.define('xy-td', XyTd);
+if(!customElements.get('wc-td')){
+    customElements.define('wc-td', WcTd);
 }
 
-export default class XyTable extends HTMLElement {
+export default class WcTable extends HTMLElement {
 
     constructor() {
         super();
@@ -126,7 +126,7 @@ export default class XyTable extends HTMLElement {
             position:relative;
             --columns:${this.thead.length||1};
         }
-        ::slotted(xy-tr:nth-child(even)){
+        ::slotted(wc-tr:nth-child(even)){
             --cellColor:var(--themeColor,#42b983);
         }
         .loading{
@@ -165,23 +165,23 @@ export default class XyTable extends HTMLElement {
             pointer-events:none;
             z-index: -1;
         }
-        :host([select]) ::slotted(xy-tr){
+        :host([select]) ::slotted(wc-tr){
             --select: flex;
         }
-        .th xy-checkbox{
+        .th wc-checkbox{
             background-color: #fff;
             border-radius: 2px;
             z-index: 5;
         }
         </style>
         ${
-            this.select?'<div class="th"><xy-checkbox></xy-checkbox></div>':''
+            this.select?'<div class="th"><wc-checkbox></wc-checkbox></div>':''
         }
         ${
             this.thead.map(el=>'<div class="th">'+el+'</div>').join('')
         }
         <slot></slot>
-        <xy-loading class="loading"></xy-loading>
+        <wc-loading class="loading"></wc-loading>
         `
     }
 
@@ -199,7 +199,7 @@ export default class XyTable extends HTMLElement {
     }
 
     get value() {
-        return Array.from(this.querySelectorAll('xy-tr[checked]'),el=>el.id||el.index);
+        return Array.from(this.querySelectorAll('wc-tr[checked]'),el=>el.id||el.index);
     }
 
     set loading(value) {
@@ -212,10 +212,10 @@ export default class XyTable extends HTMLElement {
 
     connectedCallback() {
         if(this.select){
-            this.checkbox = this.shadowRoot.querySelector('xy-checkbox');
+            this.checkbox = this.shadowRoot.querySelector('wc-checkbox');
             this.slots = this.shadowRoot.querySelector('slot');
             this.slots.addEventListener('slotchange',()=>{
-                this.cell = [...this.querySelectorAll('xy-tr')];
+                this.cell = [...this.querySelectorAll('wc-tr')];
                 this.cell.forEach((el,i)=>{
                     !el.id && (el.index = i);
                     el.onchange = () => {
@@ -243,6 +243,6 @@ export default class XyTable extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-table')){
-    customElements.define('xy-table', XyTable);
+if(!customElements.get('wc-table')){
+    customElements.define('wc-table', WcTable);
 }

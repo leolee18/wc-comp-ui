@@ -1,6 +1,6 @@
-import './xy-option.js';
+import './wc-option.js';
 
-class XyDataList extends HTMLElement {
+class WcDataList extends HTMLElement {
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -47,7 +47,7 @@ class XyDataList extends HTMLElement {
 
 
     get options() {
-        return [...this.querySelectorAll('xy-option:not([hidden]):not([disabled])')];
+        return [...this.querySelectorAll('wc-option:not([hidden]):not([disabled])')];
     }
 
     set show(value) {
@@ -79,7 +79,7 @@ class XyDataList extends HTMLElement {
     }
 
     filter(value) {
-        this.querySelectorAll('xy-option').forEach(el => {
+        this.querySelectorAll('wc-option').forEach(el => {
             if (el.value.includes('${value}')) {
                 const flag = el.value.split('${value}').filter(Boolean)[0] || '';
                 el.textContent = el.value.replace(/\${value}/g, value.split(flag[0])[0] || '');
@@ -104,7 +104,7 @@ class XyDataList extends HTMLElement {
             }
         })
         this.addEventListener('click', (ev) => {
-            const option = ev.target.closest('xy-option');
+            const option = ev.target.closest('wc-option');
             if (!option.disabled) {
                 this.selectedIndex = this.options.findIndex(el => el == option);
                 this.dispatchEvent(new InputEvent('submit'));
@@ -137,6 +137,6 @@ class XyDataList extends HTMLElement {
 
 }
 
-if (!customElements.get('xy-datalist')) {
-    customElements.define('xy-datalist', XyDataList);
+if (!customElements.get('wc-datalist')) {
+    customElements.define('wc-datalist', WcDataList);
 }

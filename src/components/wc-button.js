@@ -1,7 +1,7 @@
-import './xy-loading.js';
-import './xy-icon.js';
+import './wc-loading.js';
+import './wc-icon.js';
 
-export default class XyButton extends HTMLElement {
+export default class WcButton extends HTMLElement {
     static get observedAttributes() { return ['disabled','icon','loading','href','htmltype'] }
 
     constructor() {
@@ -111,7 +111,7 @@ export default class XyButton extends HTMLElement {
             user-select: none;
             cursor: unset;
         }
-        xy-loading{ 
+        wc-loading{ 
             margin-right: 0.35em;  
         }
         ::-moz-focus-inner{
@@ -153,11 +153,11 @@ export default class XyButton extends HTMLElement {
             opacity: .3;
             transition: 0s;
         }
-        xy-icon{
+        wc-icon{
             margin-right: 0.35em;
             transition: none;
         }
-        :host(:empty) xy-icon{
+        :host(:empty) wc-icon{
             margin: auto;
         }
         :host(:empty){
@@ -166,14 +166,14 @@ export default class XyButton extends HTMLElement {
         :host([type="flat"]:empty),:host([type="primary"]:empty){ 
             padding: calc( .65em + 1px );
         }
-        ::slotted(xy-icon){
+        ::slotted(wc-icon){
             transition: none;
         }
         :host([href]){
             cursor:pointer;
         }
         </style>
-        <${this.href?'a':'button'} ${this.htmltype?'type="'+this.htmltype+'"':''} ${(this.download&&this.href)?'download="'+this.download+'"':''} ${this.href?'href="'+this.href+'" target="'+this.target+'" rel="'+this.rel+'"':''} class="btn" id="btn"></${this.href?'a':'button'}>${!this.loading && this.icon && this.icon!='null'?'<xy-icon id="icon" name='+this.icon+'></xy-icon>':''}<slot></slot>
+        <${this.href?'a':'button'} ${this.htmltype?'type="'+this.htmltype+'"':''} ${(this.download&&this.href)?'download="'+this.download+'"':''} ${this.href?'href="'+this.href+'" target="'+this.target+'" rel="'+this.rel+'"':''} class="btn" id="btn"></${this.href?'a':'button'}>${!this.loading && this.icon && this.icon!='null'?'<wc-icon id="icon" name='+this.icon+'></wc-icon>':''}<slot></slot>
         `
     }
 
@@ -264,7 +264,7 @@ export default class XyButton extends HTMLElement {
     connectedCallback() {
         this.btn = this.shadowRoot.getElementById('btn');
         this.ico = this.shadowRoot.getElementById('icon');
-        this.load = document.createElement('xy-loading');
+        this.load = document.createElement('wc-loading');
         this.load.style.color = 'inherit';
         this.btn.addEventListener('mousedown',function(ev){
             //ev.preventDefault();
@@ -330,11 +330,11 @@ export default class XyButton extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-button')){
-    customElements.define('xy-button', XyButton);
+if(!customElements.get('wc-button')){
+    customElements.define('wc-button', WcButton);
 }
 
-class XyButtonGroup extends HTMLElement {
+class WcButtonGroup extends HTMLElement {
     static get observedAttributes() { return ['disabled'] }
     constructor() {
         super();
@@ -344,23 +344,23 @@ class XyButtonGroup extends HTMLElement {
         :host {
             display:inline-flex;
         }
-        ::slotted(xy-button:not(:first-of-type):not(:last-of-type)){
+        ::slotted(wc-button:not(:first-of-type):not(:last-of-type)){
             border-radius:0;
         }
-        ::slotted(xy-button){
+        ::slotted(wc-button){
             margin:0!important;
         }
-        ::slotted(xy-button:not(:first-of-type)){
+        ::slotted(wc-button:not(:first-of-type)){
             margin-left:-1px!important;
         }
-        ::slotted(xy-button[type]:not([type="dashed"]):not(:first-of-type)){
+        ::slotted(wc-button[type]:not([type="dashed"]):not(:first-of-type)){
             margin-left:1px!important;
         }
-        ::slotted(xy-button:first-of-type){
+        ::slotted(wc-button:first-of-type){
             border-top-right-radius: 0;
             border-bottom-right-radius: 0px;
         }
-        ::slotted(xy-button:last-of-type){
+        ::slotted(wc-button:last-of-type){
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
@@ -391,6 +391,6 @@ class XyButtonGroup extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-button-group')){
-    customElements.define('xy-button-group', XyButtonGroup);
+if(!customElements.get('wc-button-group')){
+    customElements.define('wc-button-group', WcButtonGroup);
 }

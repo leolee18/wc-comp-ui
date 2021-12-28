@@ -1,5 +1,5 @@
-import './xy-tips.js';
-export default class XyCheckbox extends HTMLElement {
+import './wc-tips.js';
+export default class WcCheckbox extends HTMLElement {
 
     static get observedAttributes() { return ['disabled','checked','required'] }
 
@@ -43,12 +43,12 @@ export default class XyCheckbox extends HTMLElement {
             display:flex;
             align-items:center;
         }
-        xy-tips{
+        wc-tips{
             display:block;
             padding-left: 0.575em;
             margin-left: -0.575em;
         }
-        xy-tips[show=show]{
+        wc-tips[show=show]{
             --themeColor:var(--errorColor,#f4615c);
             --borderColor:var(--errorColor,#f4615c);
         }
@@ -116,13 +116,13 @@ export default class XyCheckbox extends HTMLElement {
             transform:scale(1);
         }
         </style>
-        <xy-tips id="tip" type="error" dir="topleft">
+        <wc-tips id="tip" type="error" dir="topleft">
             <input type="checkbox" id="checkbox">
             <label for="checkbox">
                 <span class="cheked"><svg class="icon" style="fill: #fff;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1408"><path d="M700.7232 331.008l73.984 70.7584-329.5744 344.7808-192.6656-190.1056 71.936-72.9088L443.0336 600.576z"></path></svg></span>
                 <slot></slot>
             </label>
-        </xy-tips>
+        </wc-tips>
         `
     }
 
@@ -242,7 +242,7 @@ export default class XyCheckbox extends HTMLElement {
     }
     
     connectedCallback() {
-        this.form = this.closest('xy-form');
+        this.form = this.closest('wc-form');
         this.checkbox = this.shadowRoot.getElementById('checkbox');
         this.tip = this.shadowRoot.getElementById('tip');
         this.disabled = this.disabled;
@@ -307,12 +307,12 @@ export default class XyCheckbox extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-checkbox')){
-    customElements.define('xy-checkbox', XyCheckbox);
+if(!customElements.get('wc-checkbox')){
+    customElements.define('wc-checkbox', WcCheckbox);
 }
 
 
-class XyCheckboxGroup extends HTMLElement {
+class WcCheckboxGroup extends HTMLElement {
     static get observedAttributes() { return ['disabled','required'] }
 
     constructor() {
@@ -323,30 +323,30 @@ class XyCheckboxGroup extends HTMLElement {
         :host {
             display:inline-block;
         }
-        :host(:focus-within) xy-tips,:host(:hover) xy-tips{
+        :host(:focus-within) wc-tips,:host(:hover) wc-tips{
             z-index:2;
         }
         :host([disabled]){ 
             pointer-events: none; 
         }
-        :host([disabled]) xy-tips{
+        :host([disabled]) wc-tips{
             pointer-events: all;
             cursor: not-allowed;
             outline: 0;
         }
-        :host([disabled]) ::slotted(xy-checkbox){
+        :host([disabled]) ::slotted(wc-checkbox){
             pointer-events: none;
             opacity:.6;
         }
-        ::slotted(xy-checkbox){
+        ::slotted(wc-checkbox){
             transition: opacity .3s;
         }
-        xy-tips[show=show]{
+        wc-tips[show=show]{
             --themeColor:var(--errorColor,#f4615c);
             --borderColor:var(--errorColor,#f4615c);
         }
         </style>
-        <xy-tips id="tip" ${this.disabled?"tabindex='-1'":""} type="error"><slot></slot></xy-tips>
+        <wc-tips id="tip" ${this.disabled?"tabindex='-1'":""} type="error"><slot></slot></wc-tips>
         `
     }
 
@@ -377,7 +377,7 @@ class XyCheckboxGroup extends HTMLElement {
     }
 
     get value() {
-        return [...this.querySelectorAll('xy-checkbox[checked]')].map(el=>el.value);
+        return [...this.querySelectorAll('wc-checkbox[checked]')].map(el=>el.value);
     }
 
     get novalidate() {
@@ -490,11 +490,11 @@ class XyCheckboxGroup extends HTMLElement {
     }
 
     connectedCallback() {
-        this.form = this.closest('xy-form');
+        this.form = this.closest('wc-form');
         this.tip  = this.shadowRoot.getElementById('tip');
         this.slots = this.shadowRoot.querySelector('slot');
         this.slots.addEventListener('slotchange',()=>{
-            this.elements  = this.querySelectorAll('xy-checkbox');
+            this.elements  = this.querySelectorAll('wc-checkbox');
             this.value = this.defaultvalue;
             this.elements.forEach(el=>{
                 el.addEventListener('change',()=>{
@@ -521,6 +521,6 @@ class XyCheckboxGroup extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-checkbox-group')){
-    customElements.define('xy-checkbox-group', XyCheckboxGroup);
+if(!customElements.get('wc-checkbox-group')){
+    customElements.define('wc-checkbox-group', WcCheckboxGroup);
 }

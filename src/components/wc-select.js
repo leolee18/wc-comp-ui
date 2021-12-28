@@ -1,7 +1,7 @@
-import './xy-option.js';
-import './xy-popover.js';
+import './wc-option.js';
+import './wc-popover.js';
 
-export default class XySelect extends HTMLElement {
+export default class WcSelect extends HTMLElement {
 
     static get observedAttributes() { return ['value', 'disabled', 'type'] }
 
@@ -35,10 +35,10 @@ export default class XySelect extends HTMLElement {
             pointer-events:none;
         }
         
-        :host(:focus-within) xy-popover,:host(:active) xy-popover{ 
+        :host(:focus-within) wc-popover,:host(:active) wc-popover{ 
             z-index: 2;
         }
-        xy-tips{
+        wc-tips{
             display:block;
             width: 100%;
             height: 100%;
@@ -57,7 +57,7 @@ export default class XySelect extends HTMLElement {
             color:currentColor;
         }
 
-        xy-tips[show=show]{
+        wc-tips[show=show]{
             --themeColor:var(--errorColor,#f4615c);
             --borderColor:var(--errorColor,#f4615c);
         }
@@ -70,7 +70,7 @@ export default class XySelect extends HTMLElement {
             text-align:left;
         }
         
-        xy-input::after{
+        wc-input::after{
             content:'';
             position:absolute;
             left:0;
@@ -97,21 +97,21 @@ export default class XySelect extends HTMLElement {
         :host([search]) .arrow{
             transition:color .3s  cubic-bezier(.645, .045, .355, 1),.3s transform cubic-bezier(.645, .045, .355, 1);
         }
-        xy-popover[open] .arrow{
+        wc-popover[open] .arrow{
             transform:scaleY(-.8);
         }
-        xy-popover{
+        wc-popover{
             display:block;
             height:inherit;
             border-radius: inherit;
         }
-        xy-popcon{
+        wc-popcon{
             min-width:100%;
             overflow:auto;
             max-height:50vh;
             scroll-behavior: smooth;
         }
-        :host([search]) xy-popcon::before{
+        :host([search]) wc-popcon::before{
             display:none;
             box-sizing: border-box;
             width:100%;
@@ -122,19 +122,19 @@ export default class XySelect extends HTMLElement {
             white-space:nowrap;
             opacity:.5;
         }
-        :host([empty]) xy-popcon::before{
+        :host([empty]) wc-popcon::before{
             display:block;
         }
         </style>
         <style id="filter"></style>
-        <xy-popover id="root" ${this.search?"accomplish":""}>
-            <xy-tips id="tip" type="error">
-                <${this.search?'xy-input':'xy-button'} id="select" debounce="200" readonly ${this.disabled? "disabled" : ""} ${this.type?("type="+this.type):""}>${this.search?"":'<span id="value"></span>'}<svg class="arrow" viewBox="0 0 1024 1024"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3 0.1-12.7-6.4-12.7z"></path></svg></${this.search?'xy-input':'xy-button'}>
-            </xy-tips>
-            <xy-popcon id="options">
+        <wc-popover id="root" ${this.search?"accomplish":""}>
+            <wc-tips id="tip" type="error">
+                <${this.search?'wc-input':'wc-button'} id="select" debounce="200" readonly ${this.disabled? "disabled" : ""} ${this.type?("type="+this.type):""}>${this.search?"":'<span id="value"></span>'}<svg class="arrow" viewBox="0 0 1024 1024"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3 0.1-12.7-6.4-12.7z"></path></svg></${this.search?'wc-input':'wc-button'}>
+            </wc-tips>
+            <wc-popcon id="options">
                 <slot id="slot"></slot>
-            </xy-popcon>
-        </xy-popover>
+            </wc-popcon>
+        </wc-popover>
         `
     }
 
@@ -191,7 +191,7 @@ export default class XySelect extends HTMLElement {
     }
 
     connectedCallback() {
-        this.form = this.closest('xy-form');
+        this.form = this.closest('wc-form');
         this.root = this.shadowRoot.getElementById('root');
         this.select = this.shadowRoot.getElementById('select');
         this.options = this.shadowRoot.getElementById('options');
@@ -248,7 +248,7 @@ export default class XySelect extends HTMLElement {
         })
         this.options.addEventListener('click',(ev)=>{
             this.focus();
-            const item = ev.target.closest('xy-option');
+            const item = ev.target.closest('wc-option');
             if(item){
                 this.nativeclick = true;
                 this.value = item.value;
@@ -259,13 +259,13 @@ export default class XySelect extends HTMLElement {
                 this.select.readonly = true;
                 this.select.value = this.$text;
                 //this.value = this.$value;
-                this.nodes = [...this.querySelectorAll(`xy-option:not([disabled])`)];
+                this.nodes = [...this.querySelectorAll(`wc-option:not([disabled])`)];
                 this.filter.textContent = '';
                 this.empty = false;
 
             }
-            const place = this.querySelector(`xy-option[focusin]`);
-            const current = this.querySelector(`xy-option[selected]`);
+            const place = this.querySelector(`wc-option[focusin]`);
+            const current = this.querySelector(`wc-option[selected]`);
             if(place){
                 place.focusin = false;
             }
@@ -288,18 +288,18 @@ export default class XySelect extends HTMLElement {
             this.select.addEventListener('input',(ev)=>{
                 const value = this.select.value.trim();
                 if(value===""){
-                    this.nodes = [...this.querySelectorAll(`xy-option:not([disabled])`)];
+                    this.nodes = [...this.querySelectorAll(`wc-option:not([disabled])`)];
                     this.filter.textContent = '';
                 }else{
-                    this.nodes = [...this.querySelectorAll(`xy-option[key*="${value}" i]:not([disabled])`)];
+                    this.nodes = [...this.querySelectorAll(`wc-option[key*="${value}" i]:not([disabled])`)];
                     this.filter.textContent = `
-                    :host([search]) ::slotted(xy-option:not([key*="${value}" i]))
+                    :host([search]) ::slotted(wc-option:not([key*="${value}" i]))
                     {
                         display:none;
                     }
                     `
                 }
-                const place = this.querySelector(`xy-option[focusin]`);
+                const place = this.querySelector(`wc-option[focusin]`);
                 if(place){
                     place.focusin = false;
                 }
@@ -350,7 +350,7 @@ export default class XySelect extends HTMLElement {
             }
         })
         this.slots.addEventListener('slotchange', () => {
-            this.nodes = [...this.querySelectorAll(`xy-option:not([disabled])`)];
+            this.nodes = [...this.querySelectorAll(`wc-option:not([disabled])`)];
             if (!this.defaultvalue) {
                 this.value = '';
             } else {
@@ -484,12 +484,12 @@ export default class XySelect extends HTMLElement {
         }
         if (value !== this.value) {
             this.$value = value;
-            const pre = this.querySelector(`xy-option[selected]`);
+            const pre = this.querySelector(`wc-option[selected]`);
             if(pre){
                 pre.selected = false;
                 pre.focusin = false;
             }
-            const cur = this.querySelector(`xy-option[value="${value}"]`)||this.querySelector(`xy-option`);
+            const cur = this.querySelector(`wc-option[value="${value}"]`)||this.querySelector(`wc-option`);
             this.focusIndex = this.nodes.indexOf(cur);
             cur.selected = true;
             cur.focusin = true;
@@ -525,6 +525,6 @@ export default class XySelect extends HTMLElement {
     }
 }
 
-if (!customElements.get('xy-select')) {
-    customElements.define('xy-select', XySelect);
+if (!customElements.get('wc-select')) {
+    customElements.define('wc-select', WcSelect);
 }

@@ -1,5 +1,5 @@
 
-export default class XyRadio extends HTMLElement {
+export default class WcRadio extends HTMLElement {
 
     static get observedAttributes() { return ['disabled','checked'] }
 
@@ -137,7 +137,7 @@ export default class XyRadio extends HTMLElement {
     }
     
     tocheck() {
-        const selector = this.group?`xy-radio[checked]`:`xy-radio[name="${this.name}"][checked]`;
+        const selector = this.group?`wc-radio[checked]`:`wc-radio[name="${this.name}"][checked]`;
         const prev = this.parent.querySelector(selector);
         if( prev ){
             prev.checked = false;
@@ -146,7 +146,7 @@ export default class XyRadio extends HTMLElement {
     }
 
     connectedCallback() {
-        this.group = this.closest('xy-radio-group');
+        this.group = this.closest('wc-radio-group');
         this.parent = this.group||this.getRootNode();
         this.radio = this.shadowRoot.getElementById('radio');
         this.disabled = this.disabled;
@@ -179,11 +179,11 @@ export default class XyRadio extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-radio')){
-    customElements.define('xy-radio', XyRadio);
+if(!customElements.get('wc-radio')){
+    customElements.define('wc-radio', WcRadio);
 }
 
-class XyRadioGroup extends HTMLElement {
+class WcRadioGroup extends HTMLElement {
     static get observedAttributes() { return ['disabled','required'] }
     constructor() {
         super();
@@ -193,30 +193,30 @@ class XyRadioGroup extends HTMLElement {
         :host {
             display:inline-block;
         }
-        :host(:focus-within) xy-tips,:host(:hover) xy-tips{
+        :host(:focus-within) wc-tips,:host(:hover) wc-tips{
             z-index:2;
         }
         :host([disabled]){ 
             pointer-events: none; 
         }
-        :host([disabled]) xy-tips{
+        :host([disabled]) wc-tips{
             pointer-events: all;
             cursor: not-allowed;
             outline: 0;
         }
-        ::slotted(xy-radio){
+        ::slotted(wc-radio){
             transition: opacity .3s;
         }
-        :host([disabled]) ::slotted(xy-radio){
+        :host([disabled]) ::slotted(wc-radio){
             pointer-events: none;
             opacity:.6;
         }
-        xy-tips[show=show]{
+        wc-tips[show=show]{
             --themeColor:var(--errorColor,#f4615c);
             --borderColor:var(--errorColor,#f4615c);
         }
         </style>
-        <xy-tips id="tip" type="error"><slot></slot></xy-tips>
+        <wc-tips id="tip" type="error"><slot></slot></wc-tips>
         `
     }
 
@@ -233,7 +233,7 @@ class XyRadioGroup extends HTMLElement {
     }
 
     get value() {
-        const radio = this.querySelector('xy-radio[checked]');
+        const radio = this.querySelector('wc-radio[checked]');
         return radio?radio.value:'';
     }
 
@@ -325,11 +325,11 @@ class XyRadioGroup extends HTMLElement {
     }
 
     connectedCallback() {
-        this.form = this.closest('xy-form');
+        this.form = this.closest('wc-form');
         this.tip  = this.shadowRoot.getElementById('tip');
         this.slots = this.shadowRoot.querySelector('slot');
         this.slots.addEventListener('slotchange',()=>{
-            this.elements  = this.querySelectorAll('xy-radio');
+            this.elements  = this.querySelectorAll('wc-radio');
             this.value = this.defaultvalue;
             this.elements.forEach(el=>{
                 el.addEventListener('change',()=>{
@@ -358,6 +358,6 @@ class XyRadioGroup extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-radio-group')){
-    customElements.define('xy-radio-group', XyRadioGroup);
+if(!customElements.get('wc-radio-group')){
+    customElements.define('wc-radio-group', WcRadioGroup);
 }

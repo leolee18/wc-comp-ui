@@ -1,6 +1,6 @@
-import './xy-button.js';
+import './wc-button.js';
 
-class XyTabContent extends HTMLElement {
+class WcTabContent extends HTMLElement {
     static get observedAttributes() { return ["label","key","disabled","icon"]; }
     constructor() {
         super();
@@ -56,11 +56,11 @@ class XyTabContent extends HTMLElement {
 
 }
 
-if(!customElements.get('xy-tab-content')){
-    customElements.define('xy-tab-content', XyTabContent);
+if(!customElements.get('wc-tab-content')){
+    customElements.define('wc-tab-content', WcTabContent);
 }
 
-export default class XyTab extends HTMLElement {
+export default class WcTab extends HTMLElement {
 
     static get observedAttributes() { return ['activekey'] }
 
@@ -165,7 +165,7 @@ export default class XyTab extends HTMLElement {
         :host([align="end"]) .tab-nav{
             justify-content:flex-end;
         }
-        ::slotted(xy-tab-content){
+        ::slotted(wc-tab-content){
             box-sizing:border-box;
             width:100%;
             height:100%;
@@ -253,11 +253,11 @@ export default class XyTab extends HTMLElement {
             const slots = this.slots.assignedElements();
             let html = ''
             slots.forEach((item,index)=>{
-                if( item.tagName === 'XY-TAB-CONTENT' ){
+                if( item.tagName === 'WC-TAB-CONTENT' ){
                     if(item.key===null){
                         item.key = index;
                     }
-                    html += `<xy-button class="nav-item ${item.key===this.activekey?'active':''}" icon=${item.icon} ${item.disabled!==null?"disabled":""} data-key=${item.key}>${item.label}</xy-button>`;
+                    html += `<wc-button class="nav-item ${item.key===this.activekey?'active':''}" icon=${item.icon} ${item.disabled!==null?"disabled":""} data-key=${item.key}>${item.label}</wc-button>`;
                 }
             })
             this.nav.innerHTML = html;
@@ -270,7 +270,7 @@ export default class XyTab extends HTMLElement {
             this.init = true;
         });
         this.nav.addEventListener('click',(ev)=>{
-            const item = ev.target.closest('xy-button');
+            const item = ev.target.closest('wc-button');
             if(item){
                 this.activekey = item.dataset.key;
             }
@@ -311,7 +311,7 @@ export default class XyTab extends HTMLElement {
             this.tabline.style = `width:${active.width}px;transform:translateX(${active.left}px)`;
             this.tab.style.transform = `translateX(${-(active.index) * 100}%)`;
             this.filter.textContent = `
-            ::slotted(xy-tab-content:not([key="${this.activekey}"])){
+            ::slotted(wc-tab-content:not([key="${this.activekey}"])){
                 height:0;
                 overflow:visible;
             }
@@ -339,6 +339,6 @@ export default class XyTab extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-tab')){
-    customElements.define('xy-tab', XyTab);
+if(!customElements.get('wc-tab')){
+    customElements.define('wc-tab', WcTab);
 }
