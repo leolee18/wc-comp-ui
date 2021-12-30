@@ -55,8 +55,8 @@ npm init
 npm adduser
 npm login
 # Username:leolee18
-# Password:liyuxiliyuxi
-# Email:wwwliyuxi@163.com
+# Password:liyuxi2
+# Email:
 
 npm whoami
 
