@@ -51,6 +51,9 @@ npm i wc-comp
      
 将整个文件夹放入项目当中（可选择以上几个目录文件即可，其他文件夹均为文档测试）。
 
+![avatar](http://qiniu.boxslife.com/SYS_yhBh9KD8sJfm2zNJ)
+![avatar](http://qiniu.boxslife.com/SYS_Qh1N1DYEa1MiZQOC)
+
 ### react项目引用
 ```js
 import 'wc-comp';//推荐
