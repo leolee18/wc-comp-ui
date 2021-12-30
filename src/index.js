@@ -28,6 +28,8 @@ import WcMessage from './components/wc-message.js';
 window.WcDialog = WcDialog;
 window.WcMessage = WcMessage;
 
+// import 'wc-comp'
+
 import {appHtml,myInit} from './utils/app.js';
 document.getElementById("app").appendChild(appHtml());
 myInit();

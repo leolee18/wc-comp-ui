@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
 const htmlWebpackPlugin = require("html-webpack-plugin");
+// var host = require('./ip')();
 
 module.exports = {
   entry: './src/index.js',
@@ -11,10 +12,10 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    host: 'localhost',
+    open: 'http://localhost:9000/',
+    host: '0.0.0.0',
     compress: true,
-    port: 9000,
-    open: true
+    port: 9000
   },
   plugins: [
     new MiniCssExtractPlugin({

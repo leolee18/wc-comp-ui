@@ -24,7 +24,7 @@
 
 * npm
 ```shell
-
+npm i wc-comp
 ```
 
 * cdn
@@ -51,6 +51,20 @@
      
 将整个文件夹放入项目当中（可选择以上几个目录文件即可，其他文件夹均为文档测试）。
 
+### react项目引用
+```js
+import 'wc-comp';//推荐
+//如需单独使用
+import 'wc-comp/components/wc-button.js';
+ReactDOM.render(<wc-button>button</wc-button>, document.body);
+```
+
+### vue项目引用
+```js
+import 'wc-comp';//推荐
+//如需单独使用
+import 'wc-comp/components/wc-button.js';
+```
 
 ## 其他
 
